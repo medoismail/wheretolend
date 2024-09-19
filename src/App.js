@@ -11,10 +11,23 @@ import { SwapHoriz } from '@mui/icons-material';
 import './App.css';
 
 const darkTheme = createTheme({
+  typography: {
+    fontFamily: 'Poppins, sans-serif',  // Use Poppins font
+    h4: {
+      fontWeight: 600,  // Bold for headings
+    },
+    body1: {
+      fontWeight: 400,  // Regular for body text
+    },
+  },
   palette: {
     mode: 'dark',
-    primary: { main: '#ff007a' },
-    background: { default: '#191b1f', paper: '#212429' },
+    primary: { main: '#ffffff' },  // {{ edit_1 }} Change primary color to white
+    background: { default: '#000000', paper: '#1a1a1a' },  // {{ edit_2 }} Set background to black and paper to a dark gray
+    text: {
+      primary: '#ffffff',  // {{ edit_3 }} Set primary text color to white
+      secondary: '#cccccc',  // {{ edit_4 }} Set secondary text color to light gray
+    },
   },
 });
 
@@ -148,17 +161,25 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Container maxWidth="md" style={{ 
-        marginTop: '40px', 
+        marginTop: '32px',  // 4 * 8
         display: 'flex', 
         flexDirection: 'column', 
         alignItems: 'center', 
         minHeight: '100vh' 
       }}>
-        <Typography variant="h4" align="center" style={{ marginBottom: '40px', color: '#ff007a' }}>
-          DeFi Lending/Borrowing Rate Comparison
+        <Typography variant="h4" align="center" style={{ marginBottom: '40px', color: '#8A2BE2' }}>
+          DeFi Rate Explorer
         </Typography>
         
-        <Paper style={{ padding: '40px', marginBottom: '40px', backgroundColor: '#2c2f36', width: '100%', maxWidth: '600px' }}>
+        <Paper style={{ 
+          padding: '32px',  // 4 * 8
+          marginBottom: '32px',  // 4 * 8
+          backgroundColor: 'transparent',  // No background
+          border: '2px solid #333333',  // Dark gray outline color
+          borderRadius: '20px',  // Rounded corners
+          width: '100%', 
+          maxWidth: '600px' 
+        }}>
           <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
             <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
               <Autocomplete
@@ -188,6 +209,15 @@ function App() {
                           {params.InputProps.startAdornment}
                         </>
                       ),
+                      style: {
+                        border: '1px solid #333333',  // Custom border
+                        borderRadius: '20px',  // Rounded corners
+                        backgroundColor: 'transparent',  // Transparent background
+                      },
+                    }}
+                    style={{
+                      borderRadius: '20px',  // Rounded corners
+                      backgroundColor: 'transparent',  // Transparent background
                     }}
                   />
                 )}
@@ -229,6 +259,15 @@ function App() {
                           {params.InputProps.startAdornment}
                         </>
                       ),
+                      style: {
+                        border: '1px solid #333333',  // Custom border
+                        borderRadius: '20px',  // Rounded corners
+                        backgroundColor: 'transparent',  // Transparent background
+                      },
+                    }}
+                    style={{
+                      borderRadius: '20px',  // Rounded corners
+                      backgroundColor: 'transparent',  // Transparent background
                     }}
                   />
                 )}
@@ -243,10 +282,15 @@ function App() {
             </Box>
             <Button 
               variant="contained" 
-              color="primary" 
+              style={{ 
+                width: '100%', 
+                marginTop: '16px',  // 2 * 8
+                borderRadius: '20px', 
+                backgroundColor: 'rgb(138, 43, 226)', 
+                color: '#000000', 
+                padding: '12px 0',  // Vertical padding
+              }}  
               onClick={fetchResults}
-              style={{ width: '100%', marginTop: '20px' }}
-              disabled={loading}
             >
               {loading ? <CircularProgress size={24} /> : 'where to lend'}
             </Button>
@@ -255,7 +299,13 @@ function App() {
 
         {hasSearched && (
           <>
-            <TableContainer component={Paper} style={{ backgroundColor: '#2c2f36', marginBottom: '20px', width: '100%' }}>
+            <TableContainer component={Paper} style={{ 
+              backgroundColor: 'transparent',  // No background
+              marginBottom: '20px', 
+              width: '100%', 
+              border: '2px solid #333333',  // Dark gray outline color
+              borderRadius: '20px',  // Rounded corners
+            }}>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -311,6 +361,32 @@ function App() {
             </Box>
           </>
         )}
+
+        {/* Footer Component */}
+        <footer style={{
+          marginTop: '40px',  // Space above the footer
+          padding: '16px',  // Padding inside the footer
+          textAlign: 'center',  // Center the text
+          backgroundColor: 'transparent',  // Transparent background
+          color: '#cccccc',  // Light gray text color
+        }}>
+          <div>
+            <a href="https://www.linkedin.com/in/medoisma3il/" target="_blank" rel="noopener noreferrer" style={{ margin: '0 10px', color: '#8A2BE2' }}>
+              LinkedIn
+            </a>
+            |
+            <a href="https://x.com/0xisma3il" target="_blank" rel="noopener noreferrer" style={{ margin: '0 10px', color: '#8A2BE2' }}>
+              X
+            </a>
+            |
+            <a href="https://medoismail.design/" target="_blank" rel="noopener noreferrer" style={{ margin: '0 10px', color: '#8A2BE2' }}>
+              My Website
+            </a>
+          </div>
+          <p style={{ marginTop: '8px' }}>
+            Created using the DefiLlama API
+          </p>
+        </footer>
       </Container>
     </ThemeProvider>
   );
